@@ -43,8 +43,12 @@
 #include "w_wad.h"
 #include "z_zone.h"
 
+#if LCD_GC9A01A
+#include "scanvideo_gc9a01a.h"
+#else
 #include "pico/scanvideo.h"
 #include "pico/scanvideo/composable_scanline.h"
+#endif
 #include "pico/multicore.h"
 #include "pico/sync.h"
 #include "pico/time.h"

@@ -641,6 +641,11 @@ if (PICO_SDK)
     target_link_libraries(doom_tiny PRIVATE tiny_settings)
     add_doom_tiny(_nost render_newhope)
 
+    add_doom_tiny(_gc9a01a render_newhope)
+    target_compile_definitions(doom_tiny_gc9a01a PRIVATE
+            LCD_GC9A01A=1
+    )
+
     target_compile_definitions(doom_tiny_nost PRIVATE
             # NO_USE_FINALE_CAST=1 # note this is only used by doom II but doesnt take that much more space
             TINY_WAD_ADDR=0x10048000
