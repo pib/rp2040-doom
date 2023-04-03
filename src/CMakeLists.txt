@@ -644,6 +644,7 @@ if (PICO_SDK)
     add_doom_tiny(_gc9a01a render_newhope)
     target_compile_definitions(doom_tiny_gc9a01a PRIVATE
             LCD_GC9A01A=1
+            TINY_WAD_ADDR=0x10040000
     )
 
     target_compile_definitions(doom_tiny_nost PRIVATE
