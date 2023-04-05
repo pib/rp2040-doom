@@ -35,7 +35,7 @@
     },
     "properties": {
       "buildFolderRelativePath": "build{% if os.platform == 'win32' %}\\{% else %}/{% endif %}{{ configuration.name | downcase }}",
-      "commandPrepare": "cmake -S . -B {{ properties.buildFolderRelativePath }} -DCMAKE_BUILD_TYPE={{ properties.buildType }} -DPICO_BOARD=vgaboard -DPICO_SDK_PATH=~/git/pico-sdk -DPICO_EXTRAS_PATH=~/git/pico-extras",
+      "commandPrepare": "cmake -S . -B {{ properties.buildFolderRelativePath }} -DCMAKE_BUILD_TYPE={{ properties.buildType }} -DPICO_BOARD={{ properties.board }} -DPICO_SDK_PATH=~/git/pico-sdk -DPICO_EXTRAS_PATH=~/git/pico-extras -DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
       "commandBuild": "cmake --build {{ properties.buildFolderRelativePath }} --target {{ configuration.name }}",
       "commandClean": "cmake --build {{ properties.buildFolderRelativePath }} --target clean"
     },
@@ -43,7 +43,8 @@
     "buildConfigurations": {
       "doom_tiny": {
         "properties": {
-          "buildType": "MinSizeRel"
+          "buildType": "MinSizeRel",
+          "board": "vgaboard"
         },
         "actions": {
           "prepare": "{{ properties.commandPrepare }}",
@@ -54,9 +55,10 @@
           "clean": "{{ properties.commandClean }}"
         }
       },
-      "doom_tiny_gc9a01a": {
+      "doom_tiny_lcd": {
         "properties": {
-          "buildType": "MinSizeRel"
+          "buildType": "MinSizeRel",
+          "board": "vgaboard"
         },
         "actions": {
           "prepare": "{{ properties.commandPrepare }}",

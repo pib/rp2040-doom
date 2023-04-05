@@ -43,8 +43,8 @@
 #include "w_wad.h"
 #include "z_zone.h"
 
-#if LCD_GC9A01A
-#include "scanvideo_gc9a01a.h"
+#if USE_LCD
+#include "scanvideo_lcd.h"
 #else
 #include "pico/scanvideo.h"
 #include "pico/scanvideo/composable_scanline.h"
@@ -54,7 +54,11 @@
 #include "pico/time.h"
 #include "hardware/gpio.h"
 #include "picodoom.h"
+#if USE_LCD
+#include "doom_lcd.pio.h"
+#else
 #include "video_doom.pio.h"
+#endif
 #include "image_decoder.h"
 #if PICO_ON_DEVICE
 #include "hardware/dma.h"
@@ -151,6 +155,7 @@ static uint8_t *text_font_cpy;
 //        video_doom_offset_end_of_scanline_skip_ALIGN
 //};
 
+#ifndef USE_LCD
 static uint32_t missing_scanline_data[] =
         {
 #if YELLOW_SUBMARINE
@@ -159,6 +164,7 @@ static uint32_t missing_scanline_data[] =
 #endif
                 0u | (video_doom_offset_end_of_scanline_ALIGN << 16u)
         };
+#endif
 
 #if PICO_ON_DEVICE
 bool video_doom_adapt_for_mode(const struct scanvideo_pio_program *program, const struct scanvideo_mode *mode,
